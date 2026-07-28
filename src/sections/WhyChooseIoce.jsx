@@ -2,6 +2,7 @@ import Reveal from '../components/Reveal.jsx';
 import Card from '../components/Card.jsx';
 import Button from '../components/Button.jsx';
 import LazyVideo from '../components/LazyVideo.jsx';
+import WatchVideoTrigger from '../components/WatchVideoTrigger.jsx';
 import { VIDEO_ASSETS } from '../lib/videoAssets.js';
 
 const CREDENTIALS = [
@@ -46,6 +47,7 @@ export default function WhyChooseIoce() {
         </div>
 
         <Reveal delay={200} className="section-cta">
+          <WatchVideoTrigger asset={VIDEO_ASSETS.whyTrustIoce} label="Watch Video" />
           <Button href="#book-consultation" variant="primary">
             Book Consultation
           </Button>

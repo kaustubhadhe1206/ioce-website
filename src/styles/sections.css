@@ -29,7 +29,16 @@
 .section-cta {
   margin-top: var(--space-xl);
   display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
   justify-content: center;
+}
+
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .card-title {

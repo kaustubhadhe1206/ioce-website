@@ -52,7 +52,8 @@
 .video-modal__panel {
   position: relative;
   z-index: 1;
-  width: min(920px, 100%);
+  display: inline-block;
+  line-height: 0;
   background: var(--color-bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
@@ -79,17 +80,12 @@
 }
 
 .video-modal__video {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  max-height: 82vh;
-  margin-inline: auto;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 96vw;
+  max-height: 92vh;
   background: #000;
-}
-
-@media (min-width: 720px) {
-  .video-modal__video {
-    aspect-ratio: 16 / 9;
-  }
 }
 
 .video-modal__close {

@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import Button from '../components/Button.jsx';
 import LazyVideo from '../components/LazyVideo.jsx';
+import WatchVideoTrigger from '../components/WatchVideoTrigger.jsx';
 import { VIDEO_ASSETS } from '../lib/videoAssets.js';
-import VideoModal from '../components/VideoModal.jsx';
 
 export default function Hero() {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <section className="hero" aria-label="Introduction">
       <LazyVideo asset={VIDEO_ASSETS.heroLoop} mode="background" aria-hidden="true" />
@@ -25,15 +22,9 @@ export default function Hero() {
           <Button href="#book-consultation" variant="primary">
             Book Your Consultation
           </Button>
-          <Button as="button" variant="secondary" onClick={() => setShowModal(true)}>
-            Watch How It Works
-          </Button>
+          <WatchVideoTrigger asset={VIDEO_ASSETS.watchHowItWorks} label="Watch How It Works" />
         </div>
       </div>
-
-      {showModal && (
-        <VideoModal asset={VIDEO_ASSETS.watchHowItWorks} onClose={() => setShowModal(false)} />
-      )}
     </section>
   );
 }

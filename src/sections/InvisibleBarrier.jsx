@@ -1,5 +1,6 @@
 import Reveal from '../components/Reveal.jsx';
 import LazyVideo from '../components/LazyVideo.jsx';
+import WatchVideoTrigger from '../components/WatchVideoTrigger.jsx';
 import { VIDEO_ASSETS } from '../lib/videoAssets.js';
 
 export default function InvisibleBarrier() {
@@ -18,7 +19,8 @@ export default function InvisibleBarrier() {
           reactions under pressure. That barrier isn&rsquo;t a lack of willpower. It sits far below
           conscious thought, in the subconscious mind that runs the vast majority of what you do.
         </Reveal>
-        <Reveal delay={160}>
+        <Reveal delay={160} className="section-actions">
+          <WatchVideoTrigger asset={VIDEO_ASSETS.invisibleBarrier} label="Watch Video" />
           <a href="#what-is-hypnoreiki" className="btn btn--ghost">
             Continue &darr;
           </a>

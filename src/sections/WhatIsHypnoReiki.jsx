@@ -1,5 +1,6 @@
 import Reveal from '../components/Reveal.jsx';
 import LazyVideo from '../components/LazyVideo.jsx';
+import WatchVideoTrigger from '../components/WatchVideoTrigger.jsx';
 import { VIDEO_ASSETS } from '../lib/videoAssets.js';
 
 export default function WhatIsHypnoReiki() {
@@ -20,7 +21,8 @@ export default function WhatIsHypnoReiki() {
           challenge, while Reiki supports the nervous system&rsquo;s natural capacity to settle and
           recover. Together, they address both the mental pattern and the state it lives in.
         </Reveal>
-        <Reveal delay={160}>
+        <Reveal delay={160} className="section-actions">
+          <WatchVideoTrigger asset={VIDEO_ASSETS.whatIsHypnoReiki} label="Watch Video" />
           <a href="#why-choose-ioce" className="btn btn--ghost">
             Discover Your Transformation &darr;
           </a>
