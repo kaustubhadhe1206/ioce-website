@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>IOCE — UX/UI Wireframe & Design System</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 16mm 18mm;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---- cover ---- */
+  .cover {
+    background: #0F172A;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 24mm;
+  }
+  .cover .eyebrow { color: #C9A227; letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+  .cover h1 { font-size: 34px; line-height: 1.25; margin: 0 0 14px; max-width: 140mm; }
+  .cover p.sub { font-size: 14px; color: #cbd5e1; max-width: 130mm; line-height: 1.6; }
+  .cover .meta { margin-top: 60px; font-size: 11px; color: #8792a6; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; width: 130mm; }
+
+  /* ---- headers ---- */
+  h2.section-title {
+    font-size: 22px;
+    color: #0F172A;
+    border-bottom: 3px solid #C9A227;
+    padding-bottom: 8px;
+    margin: 0 0 4mm;
+  }
+  .page-kicker { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A227; font-weight: 700; margin-bottom: 4px; }
+  h3.sub-title { font-size: 15px; color: #0F172A; margin: 7mm 0 3mm; }
+  p.intro { font-size: 12.5px; line-height: 1.6; color: #333; margin: 0 0 5mm; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 6mm; }
+  th, td { border: 1px solid #d8d8d8; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #0F172A; color: #fff; font-size: 10.5px; }
+  tr:nth-child(even) td { background: #f7f7f8; }
+  .swatch-row td:first-child { width: 30px; }
+  .swatch { width: 22px; height: 22px; border-radius: 4px; border: 1px solid #ccc; display: inline-block; }
+
+  .footer-note { position: absolute; bottom: 10mm; left: 18mm; right: 18mm; font-size: 9px; color: #999; border-top: 1px solid #eee; padding-top: 4px; display: flex; justify-content: space-between; }
+
+  /* ---- wireframe primitives ---- */
+  .wf-frame { border: 1.5px solid #444; border-radius: 6px; padding: 10px; background: #fff; margin-bottom: 5mm; }
+  .wf-label { font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 4px; }
+  .wf-bar-xl { height: 26px; background: #dcdcdc; border-radius: 3px; width: 78%; margin: 5px 0; }
+  .wf-bar-lg { height: 18px; background: #e0e0e0; border-radius: 3px; width: 60%; margin: 5px 0; }
+  .wf-bar-md { height: 12px; background: #e8e8e8; border-radius: 3px; width: 92%; margin: 4px 0; }
+  .wf-bar-sm { height: 9px; background: #eee; border-radius: 3px; width: 55%; margin: 3px 0; }
+  .wf-pill { display: inline-block; height: 26px; padding: 0 16px; line-height: 26px; background: #C9A227; opacity: 0.85; border-radius: 999px; font-size: 9px; color: #fff; margin-right: 8px; font-weight: 600;}
+  .wf-pill.outline { background: transparent; border: 1.3px solid #999; color: #555; }
+  .wf-video { background: repeating-linear-gradient(45deg, #e2e2e2, #e2e2e2 7px, #f2f2f2 7px, #f2f2f2 14px); border: 1px solid #ccc; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .wf-card { border: 1.3px dashed #aaa; border-radius: 8px; padding: 8px; background: #fafafa; }
+  .wf-grid { display: grid; gap: 6px; }
+  .hierarchy-badge { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:#0F172A; color:#C9A227; font-size:9px; font-weight:700; margin-right:5px; }
+
+  ol.flow-steps { font-size: 11.5px; line-height: 1.9; padding-left: 18px; }
+  .callout { background: #fbf6e6; border-left: 3px solid #C9A227; padding: 6px 10px; font-size: 10.5px; margin: 4mm 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="page cover">
+  <p class="eyebrow">Institute Of Consciousness Engineering</p>
+  <h1>UX/UI Wireframe, Visual Hierarchy &amp; Design System</h1>
+  <p class="sub">
+    Complete page architecture, component library, colour system, and animation map for the IOCE
+    premium executive transformation website — prepared for review prior to development.
+    No implementation code included; structure and content only.
+  </p>
+  <div class="meta">
+    Document version 1.0 &nbsp;·&nbsp; Prepared for stakeholder review &nbsp;·&nbsp;
+    Source: IOCE Brand &amp; Website Brief
+  </div>
+</div>
+
+<!-- ============ FOUNDATIONS: BRAND ============ -->
+<div class="page">
+  <p class="page-kicker">Part A — Foundations</p>
+  <h2 class="section-title">Brand Positioning &amp; Design Intent</h2>
+
+  <p class="intro">
+    IOCE integrates internationally accredited Clinical Hypnotherapy with Authentic Usui Reiki to
+    consciously re-engineer the thoughts within the subconscious, creating meaningful and lasting
+    transformations. The website is a <strong>premium executive transformation brand</strong> — not a
+    wellness site, not a Reiki site, not a meditation site, not a therapy clinic. Every design decision
+    is judged against one goal: generate qualified, trust-driven consultation bookings.
+  </p>
+
+  <h3 class="sub-title">Brand personality</h3>
+  <table>
+    <tr><th>Embrace</th><th>Avoid</th></tr>
+    <tr><td>Premium, Elegant, Scientific, Professional, Human, Emotionally reassuring, Executive, Trustworthy</td>
+        <td>Mystical language, Spiritual clichés, Medical/clinical appearance, Alternative-healing appearance, Loud marketing, discount banners, urgency tactics</td></tr>
+  </table>
+
+  <h3 class="sub-title">Design inspiration references</h3>
+  <p class="intro">Apple · Notion · McKinsey · Tesla · Stripe · Linear · minimal luxury consulting firms — large whitespace, clean typography, elegant motion, restrained micro-interactions.</p>
+
+  <h3 class="sub-title">The single feeling every screen must produce</h3>
+  <div class="callout">"IOCE is a premium, trustworthy and transformational experience." Every CTA invites — it never pushes.</div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 2</span></div>
+</div>
+
+<!-- ============ COLOUR SYSTEM ============ -->
+<div class="page">
+  <p class="page-kicker">Part A — Foundations</p>
+  <h2 class="section-title">Colour System</h2>
+
+  <table>
+    <tr><th>Swatch</th><th>Role</th><th>Value</th><th>Usage rule</th></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#0F172A"></span></td><td>Background — Deep Navy</td><td>#0F172A</td><td>Primary canvas for every section; never used as text on light backgrounds</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#131C33"></span></td><td>Background — Raised</td><td>#131C33</td><td>Subtly lifted panels behind media before it loads</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#16213D"></span></td><td>Card surface</td><td>#16213D</td><td>All card components (testimonials, FAQ, pricing, promise)</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#FFFFFF;border:1px solid #ccc"></span></td><td>Primary text</td><td>#FFFFFF</td><td>Headlines and primary copy on navy</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#CBD5E1"></span></td><td>Secondary text — Soft White</td><td>#CBD5E1</td><td>Body copy, descriptions</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#8792A6"></span></td><td>Muted text</td><td>#8792A6</td><td>Meta labels, captions, timestamps</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#C9A227"></span></td><td>Accent — Luxury Gold</td><td>#C9A227</td><td>CTAs, eyebrows, active states, dividers — used sparingly as the one "premium" signal</td></tr>
+    <tr class="swatch-row"><td><span class="swatch" style="background:#E2C766"></span></td><td>Accent — Gold soft (gradient partner)</td><td>#E2C766</td><td>Primary button gradient only, never flat fills of large areas</td></tr>
+  </table>
+
+  <div class="callout">
+    Rule of thumb: gold never exceeds ~5% of any given viewport. It marks the single most important
+    action or credential in view — if everything is gold, nothing is.
+  </div>
+
+  <h3 class="sub-title">Surface &amp; elevation</h3>
+  <p class="intro">Subtle shadows only (soft, low-opacity, wide blur — no hard drop shadows). Rounded corners throughout (8–24px depending on component scale). Minimal glassmorphism reserved for the video-modal panel and sticky header only — not applied broadly.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 3</span></div>
+</div>
+
+<!-- ============ TYPOGRAPHY ============ -->
+<div class="page">
+  <p class="page-kicker">Part A — Foundations</p>
+  <h2 class="section-title">Typography System</h2>
+  <p class="intro">Apple-inspired system font stack (San Francisco on Apple devices, Segoe UI on Windows) — modern, elegant, highly legible at every size, no custom webfont dependency to keep load times fast.</p>
+
+  <table>
+    <tr><th>Token</th><th>Size (responsive)</th><th>Weight</th><th>Usage</th></tr>
+    <tr><td>Hero headline</td><td>36px – 68px (fluid)</td><td>600</td><td>Hero section only — one per page</td></tr>
+    <tr><td>H1 / Page heading</td><td>32px – 52px</td><td>600</td><td>Standalone page titles (Thank You, Legal pages)</td></tr>
+    <tr><td>H2 / Section heading</td><td>26px – 40px</td><td>600</td><td>One per major section, sets the section's topic</td></tr>
+    <tr><td>H3 / Card &amp; sub-heading</td><td>20px – 26px</td><td>600</td><td>Card titles, FAQ questions, roadmap milestones</td></tr>
+    <tr><td>Body large</td><td>17px – 20px</td><td>400</td><td>Section ledes / supporting statements directly under a heading</td></tr>
+    <tr><td>Body</td><td>16px</td><td>400</td><td>Standard paragraph copy</td></tr>
+    <tr><td>Small / Eyebrow</td><td>14px</td><td>600, uppercase, +0.14em tracking</td><td>Kicker labels above headings, meta text</td></tr>
+  </table>
+
+  <p class="intro">Line height 1.6 for body copy, 1.15 for headings. Letter-spacing tightened slightly (-0.01em) on large headings for a refined, editorial feel matching the Apple/Linear reference set.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 4</span></div>
+</div>
+
+<!-- ============ COMPONENT LIBRARY ============ -->
+<div class="page">
+  <p class="page-kicker">Part A — Foundations</p>
+  <h2 class="section-title">Component List</h2>
+
+  <table>
+    <tr><th>Component</th><th>Variants</th><th>Where used</th></tr>
+    <tr><td>Sticky Header</td><td>Transparent (top) → frosted navy (on scroll)</td><td>Every page</td></tr>
+    <tr><td>Button</td><td>Primary (gold gradient fill) · Secondary (outline) · Ghost (underline text link)</td><td>Every CTA sitewide</td></tr>
+    <tr><td>Card</td><td>Standard card · Bordered-dashed "example" card</td><td>Credentials, Who Can Benefit, Testimonials, Ecosystem, Consultation Options, Promise</td></tr>
+    <tr><td>Full-bleed Section Video</td><td>Background (muted/looping) · Modal (controls, audio)</td><td>Hero, Invisible Barrier, What is HypnoReiki, Why Choose IOCE, Testimonials, Watch-How-It-Works modal</td></tr>
+    <tr><td>Scroll-Reveal Wrapper</td><td>Fade+slide-up, optional stagger delay</td><td>Every heading, card, and content block</td></tr>
+    <tr><td>Accordion (FAQ item)</td><td>Single-open question/answer disclosure</td><td>FAQ section</td></tr>
+    <tr><td>Roadmap Milestone</td><td>Numbered step card with connector line</td><td>Journey section</td></tr>
+    <tr><td>Form Field</td><td>Text · Tel · Email · Textarea · Radio group · Topic chip</td><td>Consultation request form</td></tr>
+    <tr><td>Consultation Summary Row</td><td>Label/value pair</td><td>Booking Step 2</td></tr>
+    <tr><td>Info / Trust Box</td><td>Standard (gold-tinted) · Error (red-tinted)</td><td>Booking flow, confirmation messaging</td></tr>
+    <tr><td>Confirmation Checklist Row</td><td>Done (✓ gold) / Pending (—)</td><td>Thank-you page</td></tr>
+    <tr><td>Footer</td><td>Logo + tagline, quick links, copyright</td><td>Every page</td></tr>
+  </table>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 5</span></div>
+</div>
+
+<!-- ============ ANIMATION MAP ============ -->
+<div class="page">
+  <p class="page-kicker">Part A — Foundations</p>
+  <h2 class="section-title">Animation Map</h2>
+  <p class="intro">Motion is restrained and purposeful — it should never be noticed as "animation," only felt as smoothness. All motion respects the visitor's OS-level reduced-motion preference.</p>
+
+  <table>
+    <tr><th>Interaction</th><th>Effect</th><th>Trigger</th><th>Duration / easing</th></tr>
+    <tr><td>Heading &amp; paragraph entrance</td><td>Fade + slide-up (24px)</td><td>Scrolls into view (~15% visible)</td><td>900ms, premium ease-out</td></tr>
+    <tr><td>Card grids</td><td>Fade + slide-up, staggered 80–120ms per card</td><td>Scrolls into view</td><td>900ms per card, staggered start</td></tr>
+    <tr><td>Header background</td><td>Transparent → frosted-glass navy</td><td>Page scroll &gt; 24px</td><td>500ms</td></tr>
+    <tr><td>Buttons</td><td>Slight lift + gold glow on hover</td><td>Hover / focus</td><td>220ms</td></tr>
+    <tr><td>Cards</td><td>Lift (-6px) + border brightens + gold glow</td><td>Hover</td><td>500ms</td></tr>
+    <tr><td>FAQ accordion</td><td>Expand/collapse, "+" rotates to "×"</td><td>Click / keyboard Enter</td><td>220ms</td></tr>
+    <tr><td>Video modal</td><td>Backdrop fade + panel scale-in</td><td>"Watch How It Works" click</td><td>300ms</td></tr>
+    <tr><td>Booking flow steps</td><td>Cross-fade between Form → Summary → Payment</td><td>Step navigation</td><td>300ms</td></tr>
+  </table>
+
+  <div class="callout">Explicitly avoided: parallax scroll-jacking, bouncy/elastic easing, auto-playing carousels, flashing or pulsing CTAs, confetti/celebratory overload on success states.</div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 6</span></div>
+</div>
+
+<!-- ============ SITE MAP / PAGE ARCHITECTURE ============ -->
+<div class="page">
+  <p class="page-kicker">Part B — Site Architecture</p>
+  <h2 class="section-title">Page Architecture</h2>
+
+  <h3 class="sub-title">Primary page (single scrolling landing page)</h3>
+  <p class="intro">One continuous home page composed of 13 anchored sections, ending in an embedded 3-step booking flow. Sticky header persists throughout with a "Book Your Consultation" CTA that jumps to the booking anchor from anywhere on the page.</p>
+
+  <ol class="flow-steps">
+    <li>Hero</li>
+    <li>The Invisible Barrier</li>
+    <li>What is HypnoReiki?</li>
+    <li>Why Choose IOCE?</li>
+    <li>Your Journey Towards Lasting Transformation</li>
+    <li>Who Can Benefit?</li>
+    <li>Transformation Stories</li>
+    <li>IOCE Transformation Ecosystem</li>
+    <li>Consultation Options</li>
+    <li>Frequently Asked Questions</li>
+    <li>The IOCE Promise</li>
+    <li>Book Your Consultation (3-step flow: Form → Summary → Secure Payment)</li>
+    <li>Contact</li>
+    <li>Footer</li>
+  </ol>
+
+  <h3 class="sub-title">Secondary pages</h3>
+  <table>
+    <tr><th>Page</th><th>Purpose</th></tr>
+    <tr><td>Thank You</td><td>Post-booking confirmation — payment/reservation status, email &amp; WhatsApp confirmation status, next-step CTA</td></tr>
+    <tr><td>Privacy Policy</td><td>Data handling disclosure for the consultation form</td></tr>
+    <tr><td>Terms of Service</td><td>Booking, payment, cancellation/rescheduling terms</td></tr>
+    <tr><td>Disclaimer</td><td>Clarifies Hypnotherapy/Reiki are complementary, not a replacement for licensed medical/psychiatric care</td></tr>
+  </table>
+
+  <h3 class="sub-title">Visitor emotional journey (maps directly onto section order)</h3>
+  <div class="wf-frame" style="background:#0F172A; color:#fff;">
+    <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:10px;">
+      <span class="wf-pill">Curiosity</span><span class="wf-pill">Awareness</span><span class="wf-pill">Understanding</span>
+      <span class="wf-pill">Trust</span><span class="wf-pill">Clarity</span><span class="wf-pill">Possibility</span>
+      <span class="wf-pill">Proof</span><span class="wf-pill">Confidence</span><span class="wf-pill">Action</span>
+    </div>
+  </div>
+  <p class="intro">No section may skip a stage or overload the visitor — each transition (Hero → Barrier → HypnoReiki → Why Choose Us → Journey → Who Benefits → Stories → Ecosystem → Options → FAQ → Promise → Booking) is a single deliberate step down this ladder.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 7</span></div>
+</div>
+
+<!-- ============ SECTION 1 HERO ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">01 · Hero</h2>
+  <p class="intro"><strong>Emotional goal:</strong> Curiosity. <strong>Visitor should feel:</strong> "This is professional. This is different."</p>
+
+  <div class="wf-frame" style="height:78mm; background:#f4f4f4; display:flex; flex-direction:column; justify-content:center; padding:14px 20px;">
+    <div class="wf-label">Full-bleed muted background video loop (dark scrim overlay)</div>
+    <div class="wf-bar-sm" style="width:30%;"></div>
+    <div class="wf-bar-xl" style="width:85%; height:20px;"></div>
+    <div class="wf-bar-xl" style="width:70%; height:20px;"></div>
+    <div class="wf-bar-md" style="width:55%; margin-top:8px;"></div>
+    <div style="margin-top:10px;">
+      <span class="wf-pill">Book Your Consultation</span><span class="wf-pill outline">Watch How It Works</span>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>#</th><th>Element</th><th>Notes</th></tr>
+    <tr><td><span class="hierarchy-badge">1</span></td><td>Headline — "Re-Engineer the Thoughts Within Your Subconscious. Transform Your Life."</td><td>Largest text on the page; sets the entire value proposition</td></tr>
+    <tr><td><span class="hierarchy-badge">2</span></td><td>Subheadline</td><td>One sentence, clinical + Reiki integration explained plainly</td></tr>
+    <tr><td><span class="hierarchy-badge">3</span></td><td>Primary CTA — Book Your Consultation</td><td>Gold filled, jumps to booking anchor</td></tr>
+    <tr><td><span class="hierarchy-badge">4</span></td><td>Secondary CTA — Watch How It Works</td><td>Outline style, opens video modal (with sound)</td></tr>
+    <tr><td><span class="hierarchy-badge">5</span></td><td>Background cinematic video</td><td>Muted, looped, lazy-started; never competes with text legibility (scrim gradient darkens toward bottom)</td></tr>
+  </table>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 8</span></div>
+</div>
+
+<!-- ============ SECTION 2 & 3 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">02 · The Invisible Barrier &nbsp;/&nbsp; 03 · What is HypnoReiki?</h2>
+
+  <h3 class="sub-title">02 — The Invisible Barrier</h3>
+  <p class="intro"><strong>Emotional goal:</strong> Awareness → "This is exactly me." Full-bleed background video, single centred column of copy, no card grid — this section is a quiet pause, not a data section.</p>
+  <div class="wf-frame" style="height:44mm; background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-label">Background video (dimmer scrim — contemplative tone)</div>
+    <div class="wf-bar-lg" style="width:45%;"></div>
+    <div class="wf-bar-md"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-md" style="width:60%;"></div>
+    <div class="wf-pill outline" style="margin-top:8px;">Continue ↓</div>
+  </div>
+
+  <h3 class="sub-title">03 — What is HypnoReiki?</h3>
+  <p class="intro"><strong>Emotional goal:</strong> Understanding. Plain-language explanation of the methodology — explicitly no mystical language. Same single-column layout as Section 2 for rhythm continuity.</p>
+  <div class="wf-frame" style="height:44mm; background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-label">Background video (abstract / conceptual — no on-screen talent)</div>
+    <div class="wf-bar-sm" style="width:38%;"></div>
+    <div class="wf-bar-lg" style="width:50%;"></div>
+    <div class="wf-bar-md"></div><div class="wf-bar-md" style="width:85%;"></div><div class="wf-bar-md" style="width:65%;"></div>
+    <div class="wf-pill outline" style="margin-top:8px;">Discover Your Transformation ↓</div>
+  </div>
+
+  <div class="callout">Both sections deliberately restrained — a single reveal-in headline, a short paragraph, and a "continue" ghost link. No CTA to book yet: the visitor is still moving through Awareness → Understanding, not ready for Action.</div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 9</span></div>
+</div>
+
+<!-- ============ SECTION 4 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">04 · Why Choose IOCE?</h2>
+  <p class="intro"><strong>Emotional goal:</strong> Trust. First data-dense section — credentials build authority after the emotional setup of Sections 2–3.</p>
+
+  <div class="wf-frame" style="background:#f4f4f4; padding:14px 18px;">
+    <div class="wf-label">Background video (credentials reel with on-screen stat text)</div>
+    <div class="wf-bar-lg" style="width:40%; margin:0 auto 10px;"></div>
+    <div class="two-col">
+      <div class="wf-card">
+        <div class="wf-bar-md" style="width:50%;"></div>
+        <div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div><div class="wf-bar-sm" style="width:70%;"></div>
+        <div class="wf-bar-sm" style="width:85%;"></div><div class="wf-bar-sm" style="width:60%;"></div>
+      </div>
+      <div class="wf-card">
+        <div class="wf-bar-md" style="width:55%;"></div>
+        <div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:75%;"></div><div class="wf-bar-sm" style="width:65%;"></div>
+        <div class="wf-bar-sm" style="width:90%;"></div><div class="wf-bar-sm" style="width:55%;"></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:10px;"><span class="wf-pill">Book Consultation</span></div>
+  </div>
+
+  <table>
+    <tr><th>Card</th><th>Content</th></tr>
+    <tr><td>Credentials</td><td>29+ Years Professional Experience · 20+ Years Clinical Hypnotherapy &amp; Usui Reiki · International Business Experience · Internationally Accredited Clinical Hypnotherapist · Authentic 17th Generation Usui Reiki Lineage</td></tr>
+    <tr><td>Every Session Is</td><td>Private · Confidential · Professional · Online Sessions · In-Person Sessions · Exclusive Sessions at Your Preferred Location</td></tr>
+  </table>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 10</span></div>
+</div>
+
+<!-- ============ SECTION 5 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">05 · Your Journey Towards Lasting Transformation</h2>
+  <p class="intro"><strong>Emotional goal:</strong> Clarity. Animated roadmap — <em>not video</em> — four milestones in sequence, each revealing on scroll. First strong "Book Your Consultation" push after the credibility built in Section 4.</p>
+
+  <div class="wf-frame" style="background:#f4f4f4; padding:16px 18px;">
+    <div class="wf-bar-lg" style="width:55%; margin:0 auto 12px;"></div>
+    <div class="wf-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="wf-card"><div class="wf-bar-sm" style="width:30%;background:#C9A227;height:12px;"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-sm"></div></div>
+      <div class="wf-card"><div class="wf-bar-sm" style="width:30%;background:#C9A227;height:12px;"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-sm"></div></div>
+      <div class="wf-card"><div class="wf-bar-sm" style="width:30%;background:#C9A227;height:12px;"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-sm"></div></div>
+      <div class="wf-card"><div class="wf-bar-sm" style="width:30%;background:#C9A227;height:12px;"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-sm"></div></div>
+    </div>
+    <div style="text-align:center; margin-top:12px;">
+      <div class="wf-bar-md" style="width:30%; margin:0 auto 8px;"></div>
+      <span class="wf-pill">Book Your Consultation</span>
+    </div>
+  </div>
+  <p class="intro">Milestones: <strong>Book Consultation → Discover the Root Cause → Personalised HypnoReiki → Lasting Transformation.</strong> On mobile, the 4-column row collapses to a single vertical column with a connecting line down the left edge.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 11</span></div>
+</div>
+
+<!-- ============ SECTION 6 & 8 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">06 · Who Can Benefit? &nbsp;/&nbsp; 08 · IOCE Transformation Ecosystem</h2>
+
+  <h3 class="sub-title">06 — Who Can Benefit?</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:40%; margin:0 auto 10px;"></div>
+    <div class="wf-grid" style="grid-template-columns: repeat(6, 1fr);">
+      <div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div><div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div><div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div><div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div><div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div><div class="wf-card" style="text-align:center;padding:10px 4px;"><div style="width:8px;height:8px;border-radius:50%;background:#C9A227;margin:0 auto 5px;"></div><div class="wf-bar-sm" style="width:70%;margin:0 auto;"></div></div>
+    </div>
+  </div>
+  <p class="intro">12 categories total (Stress, Anxiety, Confidence, Emotional Healing, Limiting Beliefs, Peak Performance, Relationships, Leadership, Career Growth, Students, Professionals, Entrepreneurs) in a responsive 6→3→2 column grid. Uniform small cards — no single category is emphasised over another.</p>
+
+  <h3 class="sub-title">08 — IOCE Transformation Ecosystem</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:50%; margin:0 auto 6px;"></div>
+    <div class="wf-bar-sm" style="width:60%; margin:0 auto 10px;"></div>
+    <div class="wf-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="wf-card"><div class="wf-bar-sm" style="width:20%;height:16px;"></div><div class="wf-bar-md" style="width:70%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div><div class="wf-card"><div class="wf-bar-sm" style="width:20%;height:16px;"></div><div class="wf-bar-md" style="width:70%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div><div class="wf-card"><div class="wf-bar-sm" style="width:20%;height:16px;"></div><div class="wf-bar-md" style="width:70%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div><div class="wf-card"><div class="wf-bar-sm" style="width:20%;height:16px;"></div><div class="wf-bar-md" style="width:70%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div>
+    </div>
+  </div>
+  <p class="intro">Four pillars presented as elegant infographic cards: Personal Transformation, Learning, Community, Corporate Transformation — positions IOCE as a full ecosystem, not a single service.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 12</span></div>
+</div>
+
+<!-- ============ SECTION 7 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">07 · Transformation Stories</h2>
+  <p class="intro"><strong>Emotional goal:</strong> Proof. Video testimonials, click-to-play (never autoplay with sound) — this is the section where visitor scepticism should convert to belief.</p>
+
+  <div class="wf-frame" style="background:#f4f4f4; padding:14px 18px;">
+    <div class="wf-bar-lg" style="width:45%; margin:0 auto 12px;"></div>
+    <div class="wf-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="wf-card"><div class="wf-video" style="height:26mm; margin-bottom:6px;">▶ Video</div><div class="wf-bar-sm" style="width:50%;"></div><div class="wf-bar-sm" style="width:70%; opacity:0.6;"></div><div class="wf-bar-sm" style="width:90%;"></div></div><div class="wf-card"><div class="wf-video" style="height:26mm; margin-bottom:6px;">▶ Video</div><div class="wf-bar-sm" style="width:50%;"></div><div class="wf-bar-sm" style="width:70%; opacity:0.6;"></div><div class="wf-bar-sm" style="width:90%;"></div></div><div class="wf-card"><div class="wf-video" style="height:26mm; margin-bottom:6px;">▶ Video</div><div class="wf-bar-sm" style="width:50%;"></div><div class="wf-bar-sm" style="width:70%; opacity:0.6;"></div><div class="wf-bar-sm" style="width:90%;"></div></div><div class="wf-card"><div class="wf-video" style="height:26mm; margin-bottom:6px;">▶ Video</div><div class="wf-bar-sm" style="width:50%;"></div><div class="wf-bar-sm" style="width:70%; opacity:0.6;"></div><div class="wf-bar-sm" style="width:90%;"></div></div>
+    </div>
+  </div>
+  <table>
+    <tr><th>Card element</th><th>Purpose</th></tr>
+    <tr><td>Video thumbnail (click-to-play, native controls)</td><td>Face + voice = highest trust signal on the page</td></tr>
+    <tr><td>Name</td><td>Personalises the story</td></tr>
+    <tr><td>Location</td><td>Grounds the testimonial in reality (not a stock quote)</td></tr>
+    <tr><td>Outcome line</td><td>One sentence, concrete result — no vague claims</td></tr>
+  </table>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 13</span></div>
+</div>
+
+<!-- ============ SECTION 9, 10, 11 ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">09 · Consultation Options &nbsp;/&nbsp; 10 · FAQ &nbsp;/&nbsp; 11 · The IOCE Promise</h2>
+
+  <h3 class="sub-title">09 — Consultation Options</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="three-col">
+      <div class="wf-card"><div class="wf-bar-md" style="width:60%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div>
+      <div class="wf-card"><div class="wf-bar-md" style="width:70%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div>
+      <div class="wf-card"><div class="wf-bar-md" style="width:90%;"></div><div class="wf-bar-sm"></div><div class="wf-bar-sm" style="width:80%;"></div></div>
+    </div>
+    <div style="text-align:center;margin-top:10px;"><span class="wf-pill">Book Consultation</span></div>
+  </div>
+  <p class="intro">Online · Private In-Person · Exclusive Sessions at Your Preferred Location — three equal-weight cards, no option visually favoured over another.</p>
+
+  <h3 class="sub-title">10 — Frequently Asked Questions</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:40%; margin:0 auto 10px;"></div>
+    <div class="wf-card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; padding:8px 12px;"><div class="wf-bar-sm" style="width:45%; margin:0;"></div><div style="font-size:12px;color:#999;">+</div></div><div class="wf-card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; padding:8px 12px;"><div class="wf-bar-sm" style="width:45%; margin:0;"></div><div style="font-size:12px;color:#999;">+</div></div><div class="wf-card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; padding:8px 12px;"><div class="wf-bar-sm" style="width:45%; margin:0;"></div><div style="font-size:12px;color:#999;">+</div></div><div class="wf-card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; padding:8px 12px;"><div class="wf-bar-sm" style="width:45%; margin:0;"></div><div style="font-size:12px;color:#999;">+</div></div>
+  </div>
+  <p class="intro">Single-open accordion, 10 questions, FAQPage structured data for search-result rich snippets.</p>
+
+  <h3 class="sub-title">11 — The IOCE Promise</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:35%; margin:0 auto 8px;"></div>
+    <div class="wf-card" style="max-width:70%; margin:0 auto;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#C9A227;"></div><div class="wf-bar-sm" style="width:70%;margin:0;"></div></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#C9A227;"></div><div class="wf-bar-sm" style="width:70%;margin:0;"></div></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#C9A227;"></div><div class="wf-bar-sm" style="width:70%;margin:0;"></div></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#C9A227;"></div><div class="wf-bar-sm" style="width:70%;margin:0;"></div></div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:#C9A227;"></div><div class="wf-bar-sm" style="width:70%;margin:0;"></div></div>
+    </div>
+  </div>
+  <p class="intro">Single centred trust card — the last reassurance before the booking flow. Deliberately calm and minimal after the denser FAQ section.</p>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 14</span></div>
+</div>
+
+<!-- ============ BOOKING FLOW ============ -->
+<div class="page">
+  <p class="page-kicker">Part D — Booking Flow Deep-Dive</p>
+  <h2 class="section-title">12 · Book Your Consultation — 3-Step Flow</h2>
+  <p class="intro">This is the conversion moment. It must never feel like "checkout" — it should feel like the beginning of the client's transformation journey. One embedded card, three internal steps, no page reloads.</p>
+
+  <div class="wf-frame" style="background:#0F172A; color:#fff; padding:14px 20px;">
+    <ol class="flow-steps" style="color:#e2e8f0;">
+      <li><strong style="color:#C9A227;">Step 1 — Consultation Request Form:</strong> Full Name, Mobile, Email, City, Country (optional), Preferred Mode (Online / Exclusive In-Person), "What would you like help with" (free text + example topic chips)</li>
+      <li><strong style="color:#C9A227;">Step 2 — Consultation Summary:</strong> Read-only recap (Consultation Type, Fee, Duration, Mode, Preferred Time) + a reassurance box naming the practitioner and confirming confidentiality</li>
+      <li><strong style="color:#C9A227;">Step 3 — Secure Payment:</strong> Single "Proceed to Secure Payment" button (not a payment form shown upfront) → Razorpay secure checkout overlay → trust badges (Secure Payment / SSL Protected / Razorpay Verified)</li>
+      <li><strong style="color:#C9A227;">Confirmation:</strong> Redirect to Thank-You page — checklist of Payment, Reservation, Email, WhatsApp, Scheduling-link status</li>
+    </ol>
+  </div>
+
+  <h3 class="sub-title">Step-by-step wireframe</h3>
+  <div class="three-col">
+    <div class="wf-card">
+      <div class="wf-label">Step 1 — Form</div>
+      <div class="wf-bar-md"></div><div class="wf-bar-md" style="width:80%;"></div><div class="wf-bar-md" style="width:90%;"></div>
+      <div style="margin:5px 0;"><span class="wf-pill outline" style="font-size:8px;padding:0 8px;height:18px;line-height:18px;">○ Online</span><span class="wf-pill outline" style="font-size:8px;padding:0 8px;height:18px;line-height:18px;">○ In-person</span></div>
+      <div class="wf-bar-md" style="width:100%; height:26px;"></div>
+      <div style="text-align:right;margin-top:6px;"><span class="wf-pill" style="font-size:9px;">Continue</span></div>
+    </div>
+    <div class="wf-card">
+      <div class="wf-label">Step 2 — Summary</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><div class="wf-bar-sm" style="width:40%;margin:0;"></div><div class="wf-bar-sm" style="width:30%;margin:0;"></div></div><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><div class="wf-bar-sm" style="width:40%;margin:0;"></div><div class="wf-bar-sm" style="width:30%;margin:0;"></div></div><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><div class="wf-bar-sm" style="width:40%;margin:0;"></div><div class="wf-bar-sm" style="width:30%;margin:0;"></div></div><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><div class="wf-bar-sm" style="width:40%;margin:0;"></div><div class="wf-bar-sm" style="width:30%;margin:0;"></div></div>
+      <div class="wf-card" style="background:#fbf6e6;border-color:#C9A227;margin-top:6px;"><div class="wf-bar-sm" style="width:90%;"></div><div class="wf-bar-sm" style="width:70%;"></div></div>
+      <div style="text-align:right;margin-top:6px;"><span class="wf-pill outline" style="font-size:9px;">Back</span> <span class="wf-pill" style="font-size:9px;">Pay</span></div>
+    </div>
+    <div class="wf-card">
+      <div class="wf-label">Step 3 — Payment</div>
+      <div class="wf-bar-sm" style="width:70%;"></div>
+      <div style="text-align:center;margin:10px 0;"><span class="wf-pill" style="font-size:9px;">Proceed to Secure Payment</span></div>
+      <div class="wf-bar-sm" style="width:80%; text-align:center; margin:0 auto;"></div>
+      <div class="wf-bar-sm" style="width:60%; margin:4px auto;"></div>
+    </div>
+  </div>
+
+  <div class="callout">If Razorpay is not yet configured, Step 3 shows a graceful fallback message plus a "Confirm Consultation Request" action instead of a broken payment button — the visitor is never shown an error state with no path forward.</div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 15</span></div>
+</div>
+
+<!-- ============ CONTACT + FOOTER + THANK YOU ============ -->
+<div class="page">
+  <p class="page-kicker">Part C — Section Wireframes</p>
+  <h2 class="section-title">13 · Contact &nbsp;/&nbsp; Footer &nbsp;/&nbsp; Thank-You Page</h2>
+
+  <h3 class="sub-title">13 — Contact</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:30%; margin:0 auto 10px;"></div>
+    <div class="two-col">
+      <div class="wf-card">
+        <div class="wf-bar-sm" style="width:40%;"></div><div class="wf-bar-sm" style="width:50%;"></div>
+        <div class="wf-bar-sm" style="width:45%;"></div><div class="wf-bar-sm" style="width:35%;"></div><div class="wf-bar-sm" style="width:60%;"></div>
+      </div>
+      <div class="wf-video" style="height:32mm;">Google Map Embed</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Footer</h3>
+  <div class="wf-frame" style="background:#0F172A; padding:10px 18px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div class="wf-bar-sm" style="width:60px;background:#C9A227;"></div>
+      <div style="display:flex;gap:10px;"><div class="wf-bar-sm" style="width:40px;background:#556;"></div><div class="wf-bar-sm" style="width:40px;background:#556;"></div><div class="wf-bar-sm" style="width:50px;background:#556;"></div></div>
+    </div>
+    <div class="wf-bar-sm" style="width:100%; background:#334; margin-top:8px;"></div>
+  </div>
+  <p class="intro">Logo + tagline, Privacy / Terms / Disclaimer links, centred copyright line. No newsletter signup or social feed — kept deliberately quiet.</p>
+
+  <h3 class="sub-title">Thank-You Page</h3>
+  <div class="wf-frame" style="background:#f4f4f4; padding:12px 18px;">
+    <div class="wf-bar-lg" style="width:55%; margin:0 auto 6px;"></div>
+    <div class="wf-bar-sm" style="width:45%; margin:0 auto 10px;"></div>
+    <div class="wf-card" style="max-width:60%; margin:0 auto;">
+      <div class="wf-bar-sm" style="width:70%;"></div><div class="wf-bar-sm" style="width:70%;"></div><div class="wf-bar-sm" style="width:70%;"></div><div class="wf-bar-sm" style="width:70%;"></div><div class="wf-bar-sm" style="width:70%;"></div>
+    </div>
+    <div style="text-align:center; margin-top:8px;"><span class="wf-pill">Schedule Your Consultation</span></div>
+  </div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 16</span></div>
+</div>
+
+<!-- ============ RESPONSIVE + ACCESSIBILITY ============ -->
+<div class="page">
+  <p class="page-kicker">Part E — Cross-Cutting Principles</p>
+  <h2 class="section-title">Responsive Behaviour &amp; Accessibility</h2>
+
+  <h3 class="sub-title">Responsive collapse rules</h3>
+  <table>
+    <tr><th>Layout</th><th>Desktop (&gt;1024px)</th><th>Tablet (640–1024px)</th><th>Mobile (&lt;640px)</th></tr>
+    <tr><td>Card grids (Who Can Benefit, Ecosystem)</td><td>4–6 columns</td><td>2–3 columns</td><td>1 column</td></tr>
+    <tr><td>Roadmap milestones</td><td>4-column row with connector lines</td><td>2×2 grid</td><td>Single vertical column</td></tr>
+    <tr><td>Credentials / Session-quality cards</td><td>2 columns side by side</td><td>2 columns</td><td>Stacked</td></tr>
+    <tr><td>Header</td><td>Logo + tagline + CTA inline</td><td>Same, tagline may hide</td><td>Logo mark + CTA only</td></tr>
+    <tr><td>Video modal</td><td>16:9 landscape frame</td><td>16:9</td><td>9:16 portrait frame</td></tr>
+  </table>
+
+  <h3 class="sub-title">Accessibility commitments (WCAG)</h3>
+  <ol class="flow-steps">
+    <li>Skip-to-content link for keyboard users</li>
+    <li>Visible focus outline on every interactive element (gold, 2px, offset)</li>
+    <li>Background/looping videos never autoplay for visitors with reduced-motion enabled — they see a calm static frame instead</li>
+    <li>All decorative video marked hidden from assistive tech; testimonial videos remain fully accessible with native controls</li>
+    <li>Form fields carry visible labels and inline, announced error text — never colour-only error states</li>
+    <li>FAQ accordion is a native, fully keyboard-operable disclosure pattern</li>
+    <li>Colour pairings verified for AA contrast (white/soft-white text on navy; gold reserved for large text and interactive elements)</li>
+  </ol>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 17</span></div>
+</div>
+
+<!-- ============ VIDEO MAP ============ -->
+<div class="page">
+  <p class="page-kicker">Appendix</p>
+  <h2 class="section-title">Video Asset Map</h2>
+  <p class="intro">Reference for which video plays in which section, and how it behaves.</p>
+
+  <table>
+    <tr><th>Section</th><th>Treatment</th><th>Audio</th></tr>
+    <tr><td>Hero — background loop</td><td>Muted, autoplay, looped, lazy-start</td><td>None (silent loop)</td></tr>
+    <tr><td>Hero — "Watch How It Works" modal</td><td>Click-to-open overlay, native controls</td><td>Full narration</td></tr>
+    <tr><td>The Invisible Barrier — background</td><td>Muted, autoplay, looped</td><td>None</td></tr>
+    <tr><td>What is HypnoReiki? — background</td><td>Muted, autoplay, looped</td><td>None</td></tr>
+    <tr><td>Why Choose IOCE? — background</td><td>Muted, autoplay, looped (contains on-screen credential text)</td><td>None</td></tr>
+    <tr><td>Transformation Stories ×4</td><td>Click-to-play thumbnail, native controls</td><td>Full testimonial audio</td></tr>
+  </table>
+
+  <div class="callout">All video assets are lazy-loaded — nothing fetches until its section nears the viewport — keeping first-load fast and Core Web Vitals healthy despite a video-heavy page.</div>
+
+  <div class="footer-note"><span>IOCE — UX/UI Wireframe &amp; Design System</span><span>Page 18</span></div>
+</div>
+
+</body>
+</html>

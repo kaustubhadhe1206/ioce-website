@@ -1,0 +1,35 @@
+.card {
+  background: linear-gradient(160deg, var(--color-bg-card), var(--color-bg-raised));
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--duration-normal) var(--ease-premium),
+    border-color var(--duration-normal) var(--ease-premium),
+    box-shadow var(--duration-normal) var(--ease-premium);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-soft), var(--shadow-glow-gold);
+}
+
+.card-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 162, 39, 0.12);
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  font-size: 1.25rem;
+}

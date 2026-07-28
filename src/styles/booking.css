@@ -1,0 +1,191 @@
+.booking-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-top: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.booking-step {
+  animation: bookingStepFade 300ms var(--ease-premium);
+}
+
+@keyframes bookingStepFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-step {
+    animation: none;
+  }
+}
+
+.consultation-form__heading {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--space-sm);
+}
+
+.consultation-form__lede {
+  margin-bottom: var(--space-lg);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field__label {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.form-field input,
+.form-field textarea {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--fs-body);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--color-accent);
+}
+
+.form-field__error {
+  color: #e0a3a3;
+  font-size: var(--fs-small);
+}
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.form-fieldset legend {
+  width: 100%;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2xs);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+.topic-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin: var(--space-sm) 0 var(--space-lg);
+}
+
+.topic-chip {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: var(--fs-small);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-premium), color var(--duration-fast) var(--ease-premium);
+}
+
+.topic-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.consultation-form__submit {
+  width: 100%;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-lg);
+}
+
+.summary-list__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.summary-list__row dt {
+  color: var(--color-text-muted);
+}
+
+.summary-list__row dd {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+.info-box {
+  background: rgba(201, 162, 39, 0.08);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.info-box--error {
+  background: rgba(224, 163, 163, 0.08);
+  border-color: rgba(224, 163, 163, 0.3);
+}
+
+.consultation-summary__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.payment-step__trust {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.payment-step__back {
+  margin-top: var(--space-md);
+}
+
+.confirmation-card {
+  margin-block: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.confirmation-row {
+  color: var(--color-text-secondary);
+}
+
+.confirmation-row span {
+  color: var(--color-accent);
+  margin-right: 0.5rem;
+}
