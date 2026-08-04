@@ -1,5 +1,4 @@
-import crypto from 'node:crypto';
-import { getEmailConfig, getWhatsappConfig, getSheetsConfig } from './config.mjs';
+import { getEmailConfig, getWhatsappConfig } from './config.mjs';
 
 export async function sendConfirmationEmail(lead) {
   const { configured, apiKey, fromEmail } = getEmailConfig();
@@ -38,6 +37,45 @@ export async function sendConfirmationEmail(lead) {
   return { sent: res.ok, reason: res.ok ? undefined : `email_provider_error_${res.status}` };
 }
 
+export async function sendAdminNotification(lead, paymentInfo) {
+  const { configured, apiKey, fromEmail, adminEmail } = getEmailConfig();
+  if (!configured || !adminEmail) return { sent: false, reason: 'not_configured' };
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; padding:24px; color:#111;">
+      <h2 style="color:#0F172A;">New Consultation Booking</h2>
+      <ul style="line-height:1.8;">
+        <li><strong>Name:</strong> ${lead.fullName}</li>
+        <li><strong>Mobile:</strong> ${lead.mobile}</li>
+        <li><strong>Email:</strong> ${lead.email}</li>
+        <li><strong>City:</strong> ${lead.city}</li>
+        <li><strong>Country:</strong> ${lead.country || '—'}</li>
+        <li><strong>Mode:</strong> ${lead.consultationMode}</li>
+        <li><strong>Preferred time:</strong> ${lead.preferredTime || '—'}</li>
+        <li><strong>What they need help with:</strong> ${lead.helpWith}</li>
+        <li><strong>Payment status:</strong> ${paymentInfo?.status || 'unknown'}</li>
+        <li><strong>Razorpay payment ID:</strong> ${paymentInfo?.razorpayPaymentId || 'n/a'}</li>
+      </ul>
+    </div>
+  `;
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: adminEmail,
+      subject: `New IOCE Booking — ${lead.fullName}`,
+      html,
+    }),
+  });
+
+  return { sent: res.ok, reason: res.ok ? undefined : `email_provider_error_${res.status}` };
+}
+
 export async function sendWhatsappConfirmation(lead) {
   const { configured, token, phoneNumberId } = getWhatsappConfig();
   if (!configured) return { sent: false, reason: 'not_configured' };
@@ -61,75 +99,4 @@ export async function sendWhatsappConfirmation(lead) {
   });
 
   return { sent: res.ok, reason: res.ok ? undefined : `whatsapp_provider_error_${res.status}` };
-}
-
-function base64url(input) {
-  return Buffer.from(input).toString('base64url');
-}
-
-async function getGoogleAccessToken(clientEmail, privateKey) {
-  const header = base64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
-  const now = Math.floor(Date.now() / 1000);
-  const claims = base64url(
-    JSON.stringify({
-      iss: clientEmail,
-      scope: 'https://www.googleapis.com/auth/spreadsheets',
-      aud: 'https://oauth2.googleapis.com/token',
-      iat: now,
-      exp: now + 3600,
-    })
-  );
-  const unsigned = `${header}.${claims}`;
-  const signature = crypto.createSign('RSA-SHA256').update(unsigned).sign(privateKey, 'base64url');
-  const jwt = `${unsigned}.${signature}`;
-
-  const res = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-      assertion: jwt,
-    }),
-  });
-
-  if (!res.ok) throw new Error(`google_token_error_${res.status}`);
-  const data = await res.json();
-  return data.access_token;
-}
-
-export async function saveLeadToSheet(lead, paymentInfo) {
-  const { configured, clientEmail, privateKey, sheetId } = getSheetsConfig();
-  if (!configured) return { sent: false, reason: 'not_configured' };
-
-  try {
-    const accessToken = await getGoogleAccessToken(clientEmail, privateKey);
-    const row = [
-      new Date().toISOString(),
-      lead.fullName,
-      lead.mobile,
-      lead.email,
-      lead.city,
-      lead.country || '',
-      lead.consultationMode,
-      lead.helpWith,
-      paymentInfo?.razorpayPaymentId || 'pending',
-      paymentInfo?.status || 'lead_captured',
-    ];
-
-    const res = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1:append?valueInputOption=USER_ENTERED`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ values: [row] }),
-      }
-    );
-
-    return { sent: res.ok, reason: res.ok ? undefined : `sheets_api_error_${res.status}` };
-  } catch (err) {
-    return { sent: false, reason: err.message };
-  }
 }

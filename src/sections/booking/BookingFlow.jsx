@@ -2,19 +2,42 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Reveal from '../../components/Reveal.jsx';
 import ConsultationForm from './ConsultationForm.jsx';
+import ScheduleStep from './ScheduleStep.jsx';
 import ConsultationSummary from './ConsultationSummary.jsx';
 import PaymentStep from './PaymentStep.jsx';
 
-const STEPS = { FORM: 'form', SUMMARY: 'summary', PAYMENT: 'payment' };
+const STEPS = { FORM: 'form', SCHEDULE: 'schedule', SUMMARY: 'summary', PAYMENT: 'payment' };
 
 export default function BookingFlow() {
   const [step, setStep] = useState(STEPS.FORM);
   const [lead, setLead] = useState(null);
+  // { leadId, rowNumber } for the sheet row created on form submit — every
+  // later step (scheduling, payment) updates this same row instead of
+  // creating a new one.
+  const [leadRecord, setLeadRecord] = useState(null);
   const navigate = useNavigate();
 
   const handleFormSubmit = (values) => {
     setLead(values);
-    setStep(STEPS.SUMMARY);
+    setLeadRecord(null);
+    setStep(STEPS.SCHEDULE);
+
+    // Fire-and-forget: capture the funnel entry immediately rather than
+    // waiting for scheduling/payment to complete, so drop-offs still show
+    // up in the sheet. Not blocking navigation on this — it's tracking
+    // data, not something the visitor should ever wait on.
+    fetch('/.netlify/functions/create-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead: values }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.crm?.sent) {
+          setLeadRecord({ leadId: data.crm.leadId, rowNumber: data.crm.rowNumber });
+        }
+      })
+      .catch(() => {});
   };
 
   const handlePaymentSuccess = ({ paid, notifications }) => {
@@ -32,14 +55,27 @@ export default function BookingFlow() {
         <Reveal className="booking-card">
           {/* key={step} forces a remount on step change, which re-triggers the
               booking-step CSS entrance animation — a simple cross-fade between
-              Form -> Summary -> Payment without a transition library. */}
+              Form -> Schedule -> Summary -> Payment without a transition library. */}
           <div key={step} className="booking-step">
             {step === STEPS.FORM && <ConsultationForm initialValues={lead} onSubmit={handleFormSubmit} />}
+            {step === STEPS.SCHEDULE && lead && (
+              <ScheduleStep
+                lead={lead}
+                leadRecord={leadRecord}
+                onBack={() => setStep(STEPS.FORM)}
+                onContinue={() => setStep(STEPS.SUMMARY)}
+              />
+            )}
             {step === STEPS.SUMMARY && lead && (
-              <ConsultationSummary lead={lead} onBack={() => setStep(STEPS.FORM)} onConfirm={() => setStep(STEPS.PAYMENT)} />
+              <ConsultationSummary lead={lead} onBack={() => setStep(STEPS.SCHEDULE)} onConfirm={() => setStep(STEPS.PAYMENT)} />
             )}
             {step === STEPS.PAYMENT && lead && (
-              <PaymentStep lead={lead} onBack={() => setStep(STEPS.SUMMARY)} onSuccess={handlePaymentSuccess} />
+              <PaymentStep
+                lead={lead}
+                leadRecord={leadRecord}
+                onBack={() => setStep(STEPS.SUMMARY)}
+                onSuccess={handlePaymentSuccess}
+              />
             )}
           </div>
         </Reveal>

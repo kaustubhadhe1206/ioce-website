@@ -8,15 +8,16 @@
 export function getRazorpayConfig() {
   const keyId = process.env.RAZORPAY_KEY_ID;
   const keySecret = process.env.RAZORPAY_KEY_SECRET;
-  // Consultation fee in the smallest currency unit (paise). ₹1500 default — update to the real fee.
-  const amountInPaise = Number(process.env.CONSULTATION_FEE_PAISE || 150000);
+  // Consultation fee in the smallest currency unit (paise). ₹99 default — update to the real fee.
+  const amountInPaise = Number(process.env.CONSULTATION_FEE_PAISE || 9900);
   return { configured: Boolean(keyId && keySecret), keyId, keySecret, amountInPaise };
 }
 
 export function getEmailConfig() {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.CONFIRMATION_FROM_EMAIL || 'no-reply@ioce.example.com';
-  return { configured: Boolean(apiKey), apiKey, fromEmail };
+  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
+  return { configured: Boolean(apiKey), apiKey, fromEmail, adminEmail };
 }
 
 export function getWhatsappConfig() {

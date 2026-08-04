@@ -10,7 +10,7 @@ const STATUS = {
   ERROR: 'error',
 };
 
-export default function PaymentStep({ lead, onBack, onSuccess }) {
+export default function PaymentStep({ lead, leadRecord, onBack, onSuccess }) {
   const [status, setStatus] = useState(STATUS.CHECKING);
   const [errorMessage, setErrorMessage] = useState('');
   const [fallbackMessage, setFallbackMessage] = useState('');
@@ -78,7 +78,12 @@ export default function PaymentStep({ lead, onBack, onSuccess }) {
           const verifyRes = await fetch('/.netlify/functions/verify-payment', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...response, lead }),
+            body: JSON.stringify({
+              ...response,
+              lead,
+              leadId: leadRecord?.leadId,
+              rowNumber: leadRecord?.rowNumber,
+            }),
           }).then((res) => res.json());
 
           if (verifyRes.verified) {
@@ -95,7 +100,8 @@ export default function PaymentStep({ lead, onBack, onSuccess }) {
 
       razorpay.open();
     } catch (err) {
-      setErrorMessage(err.message || 'Something went wrong. Please try again.');
+      console.error('Payment step failed:', err);
+      setErrorMessage('Something went wrong while preparing your payment. Please try again.');
       setStatus(STATUS.ERROR);
     }
   };
@@ -105,7 +111,7 @@ export default function PaymentStep({ lead, onBack, onSuccess }) {
     const result = await fetch('/.netlify/functions/submit-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ lead }),
+      body: JSON.stringify({ lead, leadId: leadRecord?.leadId, rowNumber: leadRecord?.rowNumber }),
     })
       .then((res) => res.json())
       .catch(() => ({ saved: false }));

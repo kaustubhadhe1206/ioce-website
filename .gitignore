@@ -7,3 +7,12 @@ dist
 videos/
 videos-for-supabase-upload/
 *.zip
+
+# Local Netlify folder
+.netlify
+deno.lock
+*.log
+
+# Raw logo/accreditation source files — one has an unresolved stock
+# watermark + spelling errors, not ready to ship yet (see conversation)
+logos/
