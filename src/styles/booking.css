@@ -96,9 +96,38 @@
   border-color: var(--color-accent);
 }
 
+.form-field__input--error {
+  border-color: #e0a3a3;
+  background: rgba(224, 163, 163, 0.06);
+}
+
+.form-field input.form-field__input--error:focus,
+.form-field textarea.form-field__input--error:focus {
+  border-color: #e0a3a3;
+  box-shadow: 0 0 0 3px rgba(224, 163, 163, 0.18);
+}
+
 .form-field__error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   color: #e0a3a3;
   font-size: var(--fs-small);
+}
+
+.form-field__error::before {
+  content: '!';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e0a3a3;
+  color: var(--color-bg);
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .form-fieldset {

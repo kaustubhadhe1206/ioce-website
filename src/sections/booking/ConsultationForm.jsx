@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 import Button from '../../components/Button.jsx';
 import { HELP_TOPICS } from '../../lib/constants.js';
 
@@ -12,6 +12,10 @@ const EMPTY_FORM = {
   helpWith: '',
   preferredTime: '',
 };
+
+// Order matters here — used to find the first invalid field to focus after
+// a failed submit, top-to-bottom as they appear in the form.
+const FIELD_ORDER = ['fullName', 'mobile', 'email', 'city', 'helpWith'];
 
 export default function ConsultationForm({ initialValues, onSubmit }) {
   const [values, setValues] = useState(initialValues || EMPTY_FORM);
@@ -34,12 +38,23 @@ export default function ConsultationForm({ initialValues, onSubmit }) {
     if (!values.city.trim()) next.city = 'Please enter your city.';
     if (!values.helpWith.trim()) next.helpWith = 'Please share what you would like help with.';
     setErrors(next);
-    return Object.keys(next).length === 0;
+    return next;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) onSubmit(values);
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length === 0) {
+      onSubmit(values);
+      return;
+    }
+
+    // Bring the visitor straight to the first problem instead of leaving
+    // them to hunt for what's wrong, especially if it's scrolled out of view.
+    const firstInvalidField = FIELD_ORDER.find((field) => validationErrors[field]);
+    const el = firstInvalidField && document.getElementById(firstInvalidField);
+    el?.focus();
+    el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
@@ -52,16 +67,16 @@ export default function ConsultationForm({ initialValues, onSubmit }) {
 
       <div className="form-grid">
         <Field label="Full Name" error={errors.fullName}>
-          <input type="text" value={values.fullName} onChange={update('fullName')} autoComplete="name" required />
+          <input id="fullName" type="text" value={values.fullName} onChange={update('fullName')} autoComplete="name" required />
         </Field>
         <Field label="Mobile Number" error={errors.mobile}>
-          <input type="tel" value={values.mobile} onChange={update('mobile')} autoComplete="tel" required />
+          <input id="mobile" type="tel" value={values.mobile} onChange={update('mobile')} autoComplete="tel" required />
         </Field>
         <Field label="Email Address" error={errors.email}>
-          <input type="email" value={values.email} onChange={update('email')} autoComplete="email" required />
+          <input id="email" type="email" value={values.email} onChange={update('email')} autoComplete="email" required />
         </Field>
         <Field label="City" error={errors.city}>
-          <input type="text" value={values.city} onChange={update('city')} autoComplete="address-level2" required />
+          <input id="city" type="text" value={values.city} onChange={update('city')} autoComplete="address-level2" required />
         </Field>
         <Field label="Country (optional)">
           <input type="text" value={values.country} onChange={update('country')} autoComplete="country-name" />
@@ -96,7 +111,7 @@ export default function ConsultationForm({ initialValues, onSubmit }) {
       </fieldset>
 
       <Field label="What would you like help with?" error={errors.helpWith}>
-        <textarea rows={3} value={values.helpWith} onChange={update('helpWith')} required />
+        <textarea id="helpWith" rows={3} value={values.helpWith} onChange={update('helpWith')} required />
       </Field>
 
       <div className="topic-chips" role="group" aria-label="Example topics">
@@ -115,12 +130,20 @@ export default function ConsultationForm({ initialValues, onSubmit }) {
 }
 
 function Field({ label, error, children }) {
+  const errorId = error && children.props.id ? `${children.props.id}-error` : undefined;
+
+  const input = cloneElement(children, {
+    className: [children.props.className, error && 'form-field__input--error'].filter(Boolean).join(' ') || undefined,
+    'aria-invalid': error ? 'true' : undefined,
+    'aria-describedby': errorId,
+  });
+
   return (
     <label className="form-field">
       <span className="form-field__label">{label}</span>
-      {children}
+      {input}
       {error && (
-        <span className="form-field__error" role="alert">
+        <span id={errorId} className="form-field__error" role="alert">
           {error}
         </span>
       )}
