@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Reveal from '../../components/Reveal.jsx';
 import ConsultationForm from './ConsultationForm.jsx';
@@ -16,6 +16,23 @@ export default function BookingFlow() {
   // creating a new one.
   const [leadRecord, setLeadRecord] = useState(null);
   const navigate = useNavigate();
+
+  const sectionRef = useRef(null);
+  const isFirstRender = useRef(true);
+
+  // Each step's content is a very different height (a long form vs. a
+  // short summary card), so the viewport's scroll position doesn't follow
+  // it — the visitor can click "Continue" and land looking at the footer.
+  // Re-anchor to the booking section on every step change, same as the
+  // header's "Book Your Consultation" link already does. Skipped on the
+  // very first render so mounting this section doesn't itself cause a jump.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [step]);
 
   const handleFormSubmit = (values) => {
     setLead(values);
@@ -45,7 +62,7 @@ export default function BookingFlow() {
   };
 
   return (
-    <section id="book-consultation" className="section booking-section" aria-labelledby="booking-heading">
+    <section id="book-consultation" ref={sectionRef} className="section booking-section" aria-labelledby="booking-heading">
       <div className="container narrow-content">
         <p className="eyebrow">Begin Your Transformation Journey</p>
         <Reveal as="h2" id="booking-heading" className="section-heading">
