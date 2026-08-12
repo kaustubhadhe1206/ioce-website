@@ -63,12 +63,24 @@ export default function LazyVideo({
           autoPlay={isBackground}
           loop={isBackground}
           controls={!isBackground}
+          controlsList="nodownload noremoteplayback"
+          disablePictureInPicture
+          onContextMenu={(e) => e.preventDefault()}
           playsInline
           preload="none"
           {...rest}
         />
       ) : (
-        poster && <img src={poster} alt="" aria-hidden="true" className="lazy-video__poster" />
+        poster && (
+          <img
+            src={poster}
+            alt=""
+            aria-hidden="true"
+            className="lazy-video__poster"
+            draggable={false}
+            onContextMenu={(e) => e.preventDefault()}
+          />
+        )
       )}
     </div>
   );

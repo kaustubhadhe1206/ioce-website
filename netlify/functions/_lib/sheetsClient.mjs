@@ -18,6 +18,7 @@ const COLUMNS = {
   calendlyLink: 'K',
   paymentStatus: 'L',
   razorpayPaymentId: 'M',
+  plan: 'N',
 };
 
 // Millisecond timestamp + a short random suffix: sortable/readable like a
@@ -87,6 +88,7 @@ export async function createLeadRow(lead) {
       '',
       'pending',
       '',
+      lead.plan || '',
     ];
 
     const res = await fetch(

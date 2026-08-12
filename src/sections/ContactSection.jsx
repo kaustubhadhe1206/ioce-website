@@ -11,16 +11,16 @@ export default function ContactSection() {
         <div className="contact-grid">
           <Reveal as="address" className="contact-details">
             <p>
-              <strong>Phone:</strong> <a href="tel:+910000000000">+91 00000 00000</a>
+              <strong>Phone:</strong> <a href="tel:+918850958547">+91 88509 58547</a>
             </p>
             <p>
-              <strong>Email:</strong> <a href="mailto:consult@ioce.example.com">consult@ioce.example.com</a>
+              <strong>Email:</strong> <a href="mailto:prashant@chembridgeglobal.co">prashant@chembridgeglobal.co</a>
             </p>
             <p>
-              <strong>WhatsApp:</strong> <a href="https://wa.me/910000000000">+91 00000 00000</a>
+              <strong>WhatsApp:</strong> <a href="https://wa.me/918850958547">+91 88509 58547</a>
             </p>
             <p>
-              <strong>Location:</strong> To be confirmed
+              <strong>Location:</strong> Sector 11, CBD Belapur, 400614
             </p>
             <p>
               <strong>Working Hours:</strong> Monday &ndash; Saturday, 10:00 AM &ndash; 7:00 PM

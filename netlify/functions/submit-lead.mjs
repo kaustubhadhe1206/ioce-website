@@ -3,16 +3,21 @@ import { sendConfirmationEmail, sendAdminNotification, sendWhatsappConfirmation 
 import { updateLeadRow } from './_lib/sheetsClient.mjs';
 
 /**
- * Fallback path used when Razorpay isn't configured yet: fires the same
- * confirmation channels without payment, and marks the existing lead row
- * (created back when the form was submitted) as reserved-without-payment
- * rather than inserting a duplicate row.
+ * Confirms a lead without going through Razorpay. Two distinct callers
+ * land here: the free 15-minute plan, which is intentionally never
+ * supposed to see a payment step, and the fallback used when Razorpay
+ * isn't configured yet at all. Both fire the same confirmation channels
+ * and update the existing lead row (created back when the form was
+ * submitted) rather than inserting a duplicate — `reason` just picks the
+ * accurate status text for the sheet.
  */
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') return methodNotAllowed();
 
-  const { lead, leadId, rowNumber } = JSON.parse(event.body || '{}');
-  const paymentInfo = { status: 'reserved_pending_payment_setup' };
+  const { lead, leadId, rowNumber, reason } = JSON.parse(event.body || '{}');
+  const paymentInfo = {
+    status: reason === 'free_plan' ? 'not_required (15-min free plan)' : 'reserved_pending_payment_setup',
+  };
 
   const [emailResult, adminResult, whatsappResult, sheetsResult] = await Promise.all([
     sendConfirmationEmail(lead).catch((err) => ({ sent: false, reason: err.message })),

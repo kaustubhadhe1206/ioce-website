@@ -1,9 +1,9 @@
 import Button from '../../components/Button.jsx';
-import { CONSULTATION_FEE_DISPLAY, CONSULTATION_DURATION_DISPLAY } from '../../lib/constants.js';
 
-export default function ConsultationSummary({ lead, onBack, onConfirm }) {
+export default function ConsultationSummary({ lead, plan, isSubmitting, onBack, onConfirm }) {
   const consultationType =
     lead.consultationMode === 'Online' ? 'Online Consultation' : 'Exclusive In-Person Consultation';
+  const isPaidPlan = plan.feePaise > 0;
 
   return (
     <div className="consultation-summary">
@@ -11,8 +11,9 @@ export default function ConsultationSummary({ lead, onBack, onConfirm }) {
 
       <dl className="summary-list">
         <Row label="Consultation Type" value={consultationType} />
-        <Row label="Consultation Fee" value={CONSULTATION_FEE_DISPLAY} />
-        <Row label="Estimated Duration" value={CONSULTATION_DURATION_DISPLAY} />
+        <Row label="Plan" value={plan.label} />
+        <Row label="Consultation Fee" value={plan.feeDisplay} />
+        <Row label="Duration" value={plan.duration} />
         <Row label="Consultation Mode" value={lead.consultationMode} />
         <Row label="Preferred Time" value={lead.preferredTime || 'To be confirmed'} />
       </dl>
@@ -29,8 +30,8 @@ export default function ConsultationSummary({ lead, onBack, onConfirm }) {
         <Button as="button" variant="secondary" onClick={onBack}>
           Back
         </Button>
-        <Button as="button" variant="primary" onClick={onConfirm}>
-          Proceed to Secure Payment
+        <Button as="button" variant="primary" onClick={onConfirm} disabled={isSubmitting}>
+          {isPaidPlan ? 'Proceed to Secure Payment' : isSubmitting ? 'Confirming…' : 'Confirm Consultation Request'}
         </Button>
       </div>
     </div>

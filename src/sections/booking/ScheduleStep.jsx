@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Button from '../../components/Button.jsx';
 
-const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL;
+// Duration is locked by which Calendly *event type* the visitor lands on —
+// each one is configured in Calendly's own dashboard with a single fixed
+// duration, so there's no in-page control that could let them pick a
+// different length. Keyed by CONSULTATION_PLANS id in lib/constants.js.
+const CALENDLY_URLS = {
+  free15: import.meta.env.VITE_CALENDLY_URL_15MIN,
+  paid45: import.meta.env.VITE_CALENDLY_URL_45MIN,
+};
 const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
 
 let calendlyScriptPromise = null;
@@ -22,8 +29,10 @@ function loadCalendlyScript() {
 }
 
 /**
- * Embeds prashant@chembridgeglobal.co's Calendly page (30min event type)
- * between the consultation form and the summary/payment steps. Uses
+ * Embeds prashant@chembridgeglobal.co's Calendly page — the 15-min or
+ * 45-min event type, matching whichever plan the visitor picked on the
+ * previous step — between the consultation form and the summary/payment
+ * steps. Uses
  * Calendly's documented initInlineWidget() JS API rather than a static
  * `calendly-inline-widget` div, since that div only auto-initializes on
  * the script's own load event — it won't pick up ours mounting later
@@ -40,18 +49,19 @@ function loadCalendlyScript() {
  * integration we can't read back the exact slot they picked, so it's
  * deliberately generic (title + description, no pre-filled time).
  */
-export default function ScheduleStep({ lead, leadRecord, onBack, onContinue }) {
+export default function ScheduleStep({ lead, plan, leadRecord, onBack, onContinue }) {
   const containerRef = useRef(null);
   const [isScheduled, setIsScheduled] = useState(false);
+  const planCalendlyUrl = CALENDLY_URLS[plan?.id];
 
   const calendlyUrl = useMemo(() => {
-    if (!CALENDLY_URL) return null;
+    if (!planCalendlyUrl) return null;
     const params = new URLSearchParams({
       name: lead.fullName || '',
       email: lead.email || '',
     });
-    return `${CALENDLY_URL}?${params.toString()}`;
-  }, [lead]);
+    return `${planCalendlyUrl}?${params.toString()}`;
+  }, [lead, planCalendlyUrl]);
 
   useEffect(() => {
     if (!calendlyUrl) return undefined;
@@ -83,14 +93,14 @@ export default function ScheduleStep({ lead, leadRecord, onBack, onContinue }) {
           body: JSON.stringify({
             leadId: leadRecord.leadId,
             rowNumber: leadRecord.rowNumber,
-            updates: { meetingScheduled: 'Yes', calendlyLink: CALENDLY_URL },
+            updates: { meetingScheduled: 'Yes', calendlyLink: planCalendlyUrl },
           }),
         }).catch(() => {});
       }
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, [calendlyUrl, leadRecord]);
+  }, [calendlyUrl, leadRecord, planCalendlyUrl]);
 
   const googleCalendarUrl = useMemo(() => {
     const text = encodeURIComponent('IOCE Consultation with Grand Master Prashant');
@@ -104,7 +114,7 @@ export default function ScheduleStep({ lead, leadRecord, onBack, onContinue }) {
 
   return (
     <div className="schedule-step">
-      <h3 className="consultation-form__heading">Schedule Your Consultation</h3>
+      <h3 className="consultation-form__heading">Schedule Your {plan?.duration} Consultation</h3>
       <p className="consultation-form__lede">
         Choose a time that works for you. Every session is personally conducted by Grand Master
         Prashant.

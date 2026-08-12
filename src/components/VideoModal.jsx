@@ -37,7 +37,16 @@ export default function VideoModal({ asset, onClose }) {
           ✕
         </button>
         {src ? (
-          <video src={src} controls autoPlay playsInline className="video-modal__video" />
+          <video
+            src={src}
+            controls
+            controlsList="nodownload noremoteplayback"
+            disablePictureInPicture
+            onContextMenu={(e) => e.preventDefault()}
+            autoPlay
+            playsInline
+            className="video-modal__video"
+          />
         ) : (
           <p className="video-modal__fallback">Video is not available yet.</p>
         )}

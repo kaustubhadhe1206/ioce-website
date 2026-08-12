@@ -104,6 +104,8 @@ function BenefitCard({ category, delay, isMuted, setIsMuted }) {
             loop
             playsInline
             preload="none"
+            disablePictureInPicture
+            onContextMenu={(e) => e.preventDefault()}
             aria-hidden="true"
           />
         )}
