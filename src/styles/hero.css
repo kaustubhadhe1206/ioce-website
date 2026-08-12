@@ -17,6 +17,16 @@
   margin-bottom: var(--space-md);
 }
 
+/* Between the hero headline and the body subheadline in weight: --fs-h2's
+   min (1.6rem) clears --fs-body-lg's max (1.25rem), and its max (2.5rem)
+   stays under --fs-hero's min (2.25rem), at every viewport width. */
+.hero__tagline {
+  font-size: var(--fs-h2);
+  color: var(--color-text-secondary);
+  max-width: 680px;
+  margin-bottom: var(--space-md);
+}
+
 .hero__subheadline {
   font-size: var(--fs-body-lg);
   color: var(--color-text-secondary);

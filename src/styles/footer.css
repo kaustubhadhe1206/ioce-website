@@ -1,10 +1,17 @@
 .site-footer {
   border-top: 1px solid var(--color-border-soft);
   padding-block: var(--space-xl);
-  /* The accreditation bar is fixed to the viewport bottom on every page —
-     without this, it would sit on top of the last line of footer content. */
-  padding-bottom: calc(var(--space-xl) + var(--accreditation-bar-height));
   color: var(--color-text-muted);
+}
+
+/* Below 1400px the accreditation bar is a full-width strip fixed to the
+   viewport bottom (see accreditation.css) — without this it would sit on
+   top of the last line of footer content. From 1400px up it moves to a
+   left-edge side panel instead, so no clearance is needed there. */
+@media (max-width: 1399px) {
+  .site-footer {
+    padding-bottom: calc(var(--space-xl) + 64px);
+  }
 }
 
 .site-footer__inner {
@@ -69,6 +76,18 @@
 .contact-details a {
   color: var(--color-accent);
   text-decoration: none;
+}
+
+.contact-details__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.contact-details__social-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .contact-map {

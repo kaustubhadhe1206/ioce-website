@@ -109,10 +109,13 @@
 
 /* Lifted above sibling cards while its preview is popped out to full size,
    and overflow switches to visible so the pop-out isn't clipped by the
-   card's own rounded-corner mask. */
+   card's own rounded-corner mask. z-index has to clear the fixed
+   accreditation panel (z-index: 90) too, since cards on the left edge of
+   the grid (Smoking, Imposter Syndrome) pop out underneath it otherwise —
+   still below the header (100) so it can't cover the nav. */
 .benefit-card--active {
   overflow: visible;
-  z-index: 30;
+  z-index: 95;
 }
 
 .benefit-card__inner {
@@ -252,6 +255,49 @@
 
 .story-card__outcome {
   color: var(--color-text-secondary);
+}
+
+.featured-testimonial {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 360px) 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+  margin: var(--space-lg) 0 var(--space-2xl);
+}
+
+.featured-testimonial__quotes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.featured-testimonial__video {
+  box-shadow: var(--shadow-soft), var(--shadow-glow-gold);
+  border-color: var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .featured-testimonial {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-testimonial__video {
+    order: -1;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+.quote-card__text {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.quote-card__author {
+  margin-top: var(--space-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: var(--fs-small);
 }
 
 .ecosystem-grid {

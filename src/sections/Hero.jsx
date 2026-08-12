@@ -11,9 +11,10 @@ export default function Hero() {
 
       <div className="container section-content hero__content">
         <p className="eyebrow">Institute Of Consciousness Engineering</p>
-        <h1 className="hero__headline">
-          Re-Engineer the Thoughts Within Your Subconscious. Transform Your Life.
-        </h1>
+        <h1 className="hero__headline">Yes!!, Zindagi Badal Sakti Hai, Janiye Kaise?</h1>
+        <p className="hero__tagline">
+          By Re-Engineering the Thoughts Within Your Subconscious. Transform Your Life.
+        </p>
         <p className="hero__subheadline">
           Clinical Hypnotherapy integrated with Authentic Usui Reiki to create meaningful, lasting
           transformations.
