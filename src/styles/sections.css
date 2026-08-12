@@ -84,19 +84,25 @@
 }
 
 .benefit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: var(--space-lg);
-  grid-template-columns: repeat(6, 1fr);
+}
+
+.benefit-grid > * {
+  flex: 0 1 calc((100% - 5 * var(--space-md)) / 6);
 }
 
 @media (max-width: 960px) {
-  .benefit-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .benefit-grid > * {
+    flex-basis: calc((100% - 2 * var(--space-md)) / 3);
   }
 }
 
 @media (max-width: 560px) {
-  .benefit-grid {
-    grid-template-columns: 1fr;
+  .benefit-grid > * {
+    flex-basis: 100%;
   }
 }
 

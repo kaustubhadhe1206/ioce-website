@@ -2,8 +2,8 @@ import Reveal from '../components/Reveal.jsx';
 import { WhatsAppIcon, InstagramIcon } from '../components/SocialIcons.jsx';
 
 // TODO: swap for the real IOCE Instagram handle once one exists.
-const INSTAGRAM_HANDLE = '@ioce.official';
-const INSTAGRAM_URL = 'https://instagram.com/ioce.official';
+const INSTAGRAM_HANDLE = '@reiki_grandmaster_prashant';
+const INSTAGRAM_URL = 'https://instagram.com/reiki_grandmaster_prashant';
 
 const LOCATION = 'Sector 11, CBD Belapur, 400614';
 const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(LOCATION)}&output=embed`;
