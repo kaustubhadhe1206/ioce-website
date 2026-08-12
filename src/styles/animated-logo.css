@@ -1,0 +1,249 @@
+.ioce-anim-logo {
+  --gold: #d4af37;
+  --gold-bright: #f5d872;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ioce-anim-logo__rays {
+  position: absolute;
+  width: 220%;
+  height: 220%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(245, 216, 114, 0) 8deg,
+    rgba(245, 216, 114, 0.35) 10deg,
+    transparent 14deg,
+    transparent 40deg,
+    rgba(245, 216, 114, 0.22) 42deg,
+    transparent 46deg,
+    transparent 80deg,
+    rgba(245, 216, 114, 0.3) 82deg,
+    transparent 86deg,
+    transparent 130deg,
+    rgba(245, 216, 114, 0.18) 132deg,
+    transparent 136deg,
+    transparent 180deg,
+    rgba(245, 216, 114, 0.3) 182deg,
+    transparent 186deg,
+    transparent 230deg,
+    rgba(245, 216, 114, 0.22) 232deg,
+    transparent 236deg,
+    transparent 270deg,
+    rgba(245, 216, 114, 0.3) 272deg,
+    transparent 276deg,
+    transparent 320deg,
+    rgba(245, 216, 114, 0.2) 322deg,
+    transparent 326deg,
+    transparent 360deg
+  );
+  animation: ioce-logo-spin 40s linear infinite;
+  filter: blur(1px);
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+@keyframes ioce-logo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ioce-anim-logo__halo {
+  position: absolute;
+  width: 92%;
+  height: 92%;
+  border-radius: 50%;
+  animation: ioce-logo-breathe 4.5s ease-in-out infinite;
+}
+@keyframes ioce-logo-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 12px 3px rgba(212, 175, 55, 0.3), 0 0 26px 9px rgba(212, 175, 55, 0.14);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 19px 5px rgba(212, 175, 55, 0.55), 0 0 38px 13px rgba(212, 175, 55, 0.28);
+    transform: scale(1.015);
+  }
+}
+
+.ioce-anim-logo__wrap {
+  position: relative;
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: ioce-logo-float 6s ease-in-out infinite;
+}
+@keyframes ioce-logo-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.ioce-anim-logo__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.ioce-anim-logo__shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(255, 250, 220, 0.55) 50%,
+    rgba(255, 255, 255, 0) 58%,
+    transparent 70%
+  );
+  background-size: 260% 260%;
+  background-position: -60% -60%;
+  mix-blend-mode: overlay;
+  animation: ioce-logo-sweep 5.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+  pointer-events: none;
+}
+@keyframes ioce-logo-sweep {
+  0% {
+    background-position: -120% -120%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  45% {
+    background-position: 120% 120%;
+    opacity: 1;
+  }
+  55% {
+    opacity: 0;
+  }
+  100% {
+    background-position: 120% 120%;
+    opacity: 0;
+  }
+}
+
+.ioce-anim-logo__sparkle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 5px 1.5px rgba(245, 216, 114, 0.9);
+  opacity: 0;
+  animation: ioce-logo-twinkle 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.ioce-anim-logo__sparkle:nth-child(4) {
+  top: 6%;
+  left: 78%;
+  animation-delay: 0s;
+}
+.ioce-anim-logo__sparkle:nth-child(5) {
+  top: 82%;
+  left: 14%;
+  animation-delay: 0.9s;
+}
+.ioce-anim-logo__sparkle:nth-child(6) {
+  top: 18%;
+  left: 10%;
+  animation-delay: 1.8s;
+}
+.ioce-anim-logo__sparkle:nth-child(7) {
+  top: 70%;
+  left: 86%;
+  animation-delay: 2.4s;
+  width: 2px;
+  height: 2px;
+}
+.ioce-anim-logo__sparkle:nth-child(8) {
+  top: 4%;
+  left: 40%;
+  animation-delay: 1.3s;
+  width: 2px;
+  height: 2px;
+}
+@keyframes ioce-logo-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+.ioce-anim-logo__flare {
+  position: absolute;
+  top: 4%;
+  right: 8%;
+  width: 22%;
+  height: 22%;
+  pointer-events: none;
+  opacity: 0.9;
+  animation: ioce-logo-flare-pulse 4.5s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+.ioce-anim-logo__flare::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, #fff 0%, var(--gold-bright) 18%, rgba(245, 216, 114, 0) 70%);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+.ioce-anim-logo__flare::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+@keyframes ioce-logo-flare-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ioce-anim-logo__rays,
+  .ioce-anim-logo__halo,
+  .ioce-anim-logo__wrap,
+  .ioce-anim-logo__shimmer,
+  .ioce-anim-logo__sparkle,
+  .ioce-anim-logo__flare {
+    animation: none;
+  }
+}

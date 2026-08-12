@@ -6,6 +6,7 @@ import './styles/global.css';
 import './styles/buttons.css';
 import './styles/cards.css';
 import './styles/media.css';
+import './styles/animated-logo.css';
 import './styles/header.css';
 import './styles/hero.css';
 import './styles/sections.css';

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Button from './Button.jsx';
+import AnimatedLogo from './AnimatedLogo.jsx';
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,8 +18,11 @@ export default function SiteHeader() {
     <header className={`site-header ${scrolled ? 'site-header--scrolled' : ''}`}>
       <div className="container site-header__inner">
         <Link to="/" className="site-header__logo" aria-label="IOCE — Institute Of Consciousness Engineering">
-          <span className="site-header__logo-mark">IOCE</span>
-          <span className="site-header__logo-sub">Institute Of Consciousness Engineering</span>
+          <AnimatedLogo className="site-header__logo-img" />
+          <span className="site-header__logo-text">
+            <span className="site-header__logo-mark">IOCE</span>
+            <span className="site-header__logo-sub">Institute Of Consciousness Engineering</span>
+          </span>
         </Link>
 
         {isHome && (
