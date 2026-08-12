@@ -8,7 +8,7 @@
 }
 
 .hero__content {
-  padding-block: var(--space-3xl) var(--space-2xl);
+  padding-block: var(--space-3xl) var(--space-xl);
   max-width: 780px;
 }
 

@@ -27,7 +27,7 @@
 }
 
 .section-cta {
-  margin-top: var(--space-xl);
+  margin-top: var(--space-lg);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
@@ -262,7 +262,7 @@
   grid-template-columns: 1fr minmax(260px, 360px) 1fr;
   gap: var(--space-lg);
   align-items: center;
-  margin: var(--space-lg) 0 var(--space-2xl);
+  margin: var(--space-lg) 0 0;
 }
 
 .featured-testimonial__quotes {

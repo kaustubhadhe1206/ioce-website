@@ -35,7 +35,7 @@
   --space-2xl: 6rem;
   --space-3xl: 9rem;
 
-  --section-padding-y: clamp(4rem, 8vw, 8rem);
+  --section-padding-y: clamp(2.5rem, 5vw, 4.5rem);
   --content-max-width: 1180px;
 
   /* ===== Radii & shadows ===== */
