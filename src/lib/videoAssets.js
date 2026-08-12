@@ -13,4 +13,17 @@ export const VIDEO_ASSETS = {
   testimonialShweta: 'testimonial-shweta.mp4',
   testimonialRajesh: 'testimonial-rajesh.mp4',
   testimonialKarishma: 'testimonial-karishma.mp4',
+
+  // "Are you or your loved ones experiencing the following?" hover-to-play clips.
+  issueSmoking: 'v1_Smoking.mp4',
+  issueAnxiety: 'v1_Anxiety.mp4',
+  issueSelfDoubt: 'v1_Self-Doubt.mp4',
+  issueAnger: 'v1_Anger.mp4',
+  issueBurnout: 'v1_Burnout.mp4',
+  issueDecisionFatigue: 'v1_Decision Fatigue.mp4',
+  issueImposterSyndrome: 'v1_Imposter Syndrome.mp4',
+  issueJobInterviewAnxiety: 'v1_Job Interview Anxiety.mp4',
+  issueOverthinking: 'v1_Overthinking.mp4',
+  issueRelationships: 'v1_Relationships.mp4',
+  issueSleepDeprivation: 'v1_Sleep_.mp4',
 };

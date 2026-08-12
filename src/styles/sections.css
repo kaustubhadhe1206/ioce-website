@@ -101,22 +101,137 @@
 }
 
 .benefit-card {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  min-height: 168px;
+}
+
+/* Lifted above sibling cards while its preview is popped out to full size,
+   and overflow switches to visible so the pop-out isn't clipped by the
+   card's own rounded-corner mask. */
+.benefit-card--active {
+  overflow: visible;
+  z-index: 30;
+}
+
+.benefit-card__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
   padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  transition: width var(--duration-normal) var(--ease-premium),
+    height var(--duration-normal) var(--ease-premium),
+    box-shadow var(--duration-normal) var(--ease-premium);
+}
+
+/* Grown to the clips' native 1920x1080 (16:9) ratio so object-fit: cover
+   has no mismatched aspect ratio left to crop into — the full frame shows. */
+.benefit-card--active .benefit-card__inner {
+  width: 340px;
+  height: 191px;
+  background: #000;
+  box-shadow: var(--shadow-soft), var(--shadow-glow-gold);
+}
+
+@media (max-width: 640px) {
+  .benefit-card--active .benefit-card__inner {
+    width: 260px;
+    height: 146px;
+  }
 }
 
 .benefit-card__mark {
+  position: relative;
+  z-index: 1;
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--color-accent);
   margin-bottom: var(--space-sm);
+  transition: opacity var(--duration-fast) var(--ease-premium);
 }
 
 .benefit-card__title {
+  position: relative;
+  z-index: 1;
   font-size: 1.05rem;
   color: var(--color-text-primary);
+  transition: text-shadow var(--duration-fast) var(--ease-premium),
+    opacity var(--duration-fast) var(--ease-premium);
+}
+
+.benefit-card--active .benefit-card__title {
+  opacity: 0.55;
+}
+
+.benefit-card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-premium);
+}
+
+.benefit-card--active .benefit-card__video {
+  opacity: 1;
+}
+
+.benefit-card--active .benefit-card__mark {
+  opacity: 0;
+}
+
+.benefit-card--active .benefit-card__title {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 0, 0, 0.6);
+}
+
+.benefit-card__inner:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.benefit-card__mute-toggle {
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-premium);
+}
+
+.benefit-card__mute-toggle:hover {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .benefit-card__video {
+    display: none;
+  }
 }
 
 .stories-grid {

@@ -28,11 +28,11 @@ export default function HomePage() {
     <>
       <script type="application/ld+json">{JSON.stringify(businessSchema)}</script>
       <Hero />
+      <WhoCanBenefit />
       <InvisibleBarrier />
       <WhatIsHypnoReiki />
       <WhyChooseIoce />
       <JourneyRoadmap />
-      <WhoCanBenefit />
       <TransformationStories />
       <TransformationEcosystem />
       <ConsultationOptions />
