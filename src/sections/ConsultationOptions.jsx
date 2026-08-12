@@ -4,7 +4,6 @@ import Button from '../components/Button.jsx';
 
 const OPTIONS = [
   { title: 'Online', description: 'A private, secure video consultation from wherever you are.' },
-  { title: 'Private In-Person', description: 'A confidential in-person session at IOCE’s practice space.' },
   { title: 'Exclusive Sessions at Your Preferred Location', description: 'A fully private session hosted at a location of your choosing.' },
 ];
 

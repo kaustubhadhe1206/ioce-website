@@ -34,8 +34,8 @@ export default function HomePage() {
       <WhyChooseIoce />
       <JourneyRoadmap />
       <TransformationStories />
-      <TransformationEcosystem />
       <ConsultationOptions />
+      <TransformationEcosystem />
       <FaqSection />
       <IocePromise />
       <BookingFlow />
