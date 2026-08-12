@@ -12,6 +12,7 @@ import './styles/sections.css';
 import './styles/roadmap.css';
 import './styles/booking.css';
 import './styles/footer.css';
+import './styles/accreditation.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

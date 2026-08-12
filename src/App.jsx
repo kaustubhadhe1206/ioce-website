@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import SiteHeader from './components/SiteHeader.jsx';
 import SiteFooter from './components/SiteFooter.jsx';
+import AccreditationBar from './components/AccreditationBar.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ThankYouPage from './pages/ThankYouPage.jsx';
 import PrivacyPage from './pages/PrivacyPage.jsx';
@@ -24,6 +25,7 @@ export default function App() {
         </Routes>
       </main>
       <SiteFooter />
+      <AccreditationBar />
     </>
   );
 }

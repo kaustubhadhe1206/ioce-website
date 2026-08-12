@@ -1,6 +1,9 @@
 .site-footer {
   border-top: 1px solid var(--color-border-soft);
   padding-block: var(--space-xl);
+  /* The accreditation bar is fixed to the viewport bottom on every page —
+     without this, it would sit on top of the last line of footer content. */
+  padding-bottom: calc(var(--space-xl) + var(--accreditation-bar-height));
   color: var(--color-text-muted);
 }
 
