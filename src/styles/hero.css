@@ -8,13 +8,40 @@
 }
 
 .hero__content {
-  padding-block: var(--space-3xl) var(--space-xl);
-  max-width: 780px;
+  /* Top padding clears the header's own height (now taller/static to fit the
+     2x, no-longer-shrinking logo) instead of the shared --space-3xl token. */
+  padding-block: 11.5rem var(--space-xl);
+}
+
+.hero .eyebrow {
+  font-size: 1rem;
+}
+
+.hero__headline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .hero__headline {
-  font-size: var(--fs-hero);
-  margin-bottom: var(--space-md);
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 780px;
+  font-size: clamp(2.05rem, 4.6vw, 3.85rem);
+  font-size: 50px;
+}
+
+.hero__watch {
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .hero__headline-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* Between the hero headline and the body subheadline in weight: --fs-h2's

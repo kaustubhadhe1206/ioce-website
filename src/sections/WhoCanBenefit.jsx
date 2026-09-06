@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Reveal from '../components/Reveal.jsx';
 import Card from '../components/Card.jsx';
+import VideoModal from '../components/VideoModal.jsx';
 import { getVideoUrl } from '../lib/supabaseClient.js';
 import { VIDEO_ASSETS } from '../lib/videoAssets.js';
 
@@ -27,7 +28,7 @@ export default function WhoCanBenefit() {
     <section className="section" aria-labelledby="who-benefits-heading">
       <div className="container">
         <Reveal as="h2" id="who-benefits-heading" className="section-heading section-heading--center">
-          Are you or your loved ones experiencing the following?
+          Is this you or someone you love?
         </Reveal>
 
         <div className="card-grid benefit-grid">
@@ -54,6 +55,7 @@ export default function WhoCanBenefit() {
 function BenefitCard({ category, delay, isMuted, setIsMuted }) {
   const [isActive, setIsActive] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef(null);
 
   const activate = () => {
@@ -68,13 +70,15 @@ function BenefitCard({ category, delay, isMuted, setIsMuted }) {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (isActive) {
+    // Paused (not just muted) while the fullscreen modal is open — otherwise, if the
+    // visitor had already unmuted the hover preview, its audio would overlap the modal's.
+    if (isActive && !isFullscreen) {
       video.muted = isMuted;
       video.play().catch(() => {});
     } else {
       video.pause();
     }
-  }, [isActive, isMuted, src]);
+  }, [isActive, isMuted, isFullscreen, src]);
 
   const toggleMute = (event) => {
     event.stopPropagation();
@@ -120,7 +124,30 @@ function BenefitCard({ category, delay, isMuted, setIsMuted }) {
             {isMuted ? '🔇' : '🔊'}
           </button>
         )}
+
+        {isActive && src && (
+          <button
+            type="button"
+            className="benefit-card__expand"
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsFullscreen(true);
+            }}
+            aria-label={`View ${category.label} video full screen`}
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+              <path d="M16 3h3a2 2 0 0 1 2 2v3" />
+              <path d="M8 21H5a2 2 0 0 1-2-2v-3" />
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+            </svg>
+          </button>
+        )}
       </div>
+
+      {isFullscreen && (
+        <VideoModal asset={category.asset} label={category.label} onClose={() => setIsFullscreen(false)} />
+      )}
     </Reveal>
   );
 }

@@ -11,7 +11,14 @@ export default function Hero() {
 
       <div className="container section-content hero__content">
         <p className="eyebrow">Institute Of Consciousness Engineering</p>
-        <h1 className="hero__headline">Yes!!, Zindagi Badal Sakti Hai, Janiye Kaise?</h1>
+
+        <div className="hero__headline-row">
+          <h1 className="hero__headline">Yes!!, Zindagi Badal Sakti Hai, Janiye Kaise?</h1>
+          <div className="hero__watch">
+            <WatchVideoTrigger asset={VIDEO_ASSETS.watchHowItWorks} label="Watch How It Works" />
+          </div>
+        </div>
+
         <p className="hero__tagline">
           By Re-Engineering the Thoughts Within Your Subconscious. Transform Your Life.
         </p>
@@ -23,7 +30,6 @@ export default function Hero() {
           <Button href="#book-consultation" variant="primary">
             Book Your Consultation
           </Button>
-          <WatchVideoTrigger asset={VIDEO_ASSETS.watchHowItWorks} label="Watch How It Works" />
         </div>
       </div>
     </section>

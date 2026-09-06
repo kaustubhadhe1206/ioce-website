@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { getVideoUrl } from '../lib/supabaseClient.js';
 
-export default function VideoModal({ asset, onClose }) {
+export default function VideoModal({ asset, onClose, label = 'Video' }) {
   const closeButtonRef = useRef(null);
   const src = getVideoUrl(asset);
 
@@ -24,7 +24,7 @@ export default function VideoModal({ asset, onClose }) {
   // wrapper into the containing block for this modal's `position: fixed`,
   // shrinking it down to the wrapper's small box instead of the viewport.
   return createPortal(
-    <div className="video-modal" role="dialog" aria-modal="true" aria-label="How It Works video">
+    <div className="video-modal" role="dialog" aria-modal="true" aria-label={`${label} video`}>
       <div className="video-modal__backdrop" onClick={onClose} />
       <div className="video-modal__panel">
         <button
