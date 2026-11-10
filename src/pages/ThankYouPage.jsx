@@ -1,22 +1,26 @@
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/Button.jsx';
 import Card from '../components/Card.jsx';
 
 export default function ThankYouPage() {
-  const { state } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Keep the booking result in component state, then clear it from the
+  // history entry. React Router stores navigation state in window.history,
+  // which survives a reload, so without clearing it a refresh would show
+  // this page again. Once cleared, a refresh (or a direct visit to
+  // /thank-you) has no state and is sent back to the home page.
+  const [state] = useState(location.state);
+
+  useEffect(() => {
+    if (location.state) {
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location.pathname, location.state, navigate]);
 
   if (!state) {
-    return (
-      <section className="section">
-        <div className="container narrow-content">
-          <h1 className="section-heading">Welcome To Your Transformation Journey</h1>
-          <p>If you&rsquo;ve just completed a booking, check your email for confirmation details.</p>
-          <Button to="/" variant="primary">
-            Return Home
-          </Button>
-        </div>
-      </section>
-    );
+    return <Navigate to="/" replace />;
   }
 
   const { paid, notifications } = state;
