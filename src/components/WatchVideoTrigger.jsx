@@ -7,7 +7,7 @@ import VideoModal from './VideoModal.jsx';
  * Shared by the Hero's "Watch How It Works" and every background-video
  * section — otherwise a video kept with narration has no way to be heard.
  */
-export default function WatchVideoTrigger({ asset, label = 'Watch Video', variant = 'secondary', className = '' }) {
+export default function WatchVideoTrigger({ asset, label = 'Watch Video', variant = 'video', className = '' }) {
   const [open, setOpen] = useState(false);
 
   return (

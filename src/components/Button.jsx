@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
 /**
- * variant: "primary" (gold fill) | "secondary" (outline) | "ghost" (text + underline)
+ * variant: "primary" (gold fill) | "secondary" (outline) | "video" (bright yellow fill)
+ *          | "ghost" (text + underline)
  * Renders an <a> for in-page anchors, a router <Link> for internal routes,
  * or a <button> when `onClick` is supplied with no href.
  */

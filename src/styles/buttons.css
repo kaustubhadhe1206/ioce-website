@@ -41,6 +41,20 @@
   box-shadow: var(--shadow-glow-gold);
 }
 
+/* "Watch Video" buttons: solid bright yellow so they stand out on the navy
+   background. */
+.btn--video {
+  background: #facc15;
+  color: #1a1400;
+  border-color: #facc15;
+}
+
+.btn--video:hover {
+  background: #fde047;
+  border-color: #fde047;
+  box-shadow: 0 0 40px rgba(250, 204, 21, 0.35);
+}
+
 .btn--ghost {
   background: transparent;
   color: var(--color-text-secondary);
